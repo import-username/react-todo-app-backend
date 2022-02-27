@@ -1,5 +1,5 @@
 import sequelize from "../connection";
-import { DataTypes, Model } from "sequelize/dist";
+import { DataTypes, Model } from "sequelize";
 
 class User extends Model {}
 
@@ -18,7 +18,7 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false
     }
-}, { sequelize, modelName: "User", timestamps: true });
+}, { sequelize, modelName: "User", timestamps: true, tableName: "users" });
 
 User.sync({ alter: true });
 

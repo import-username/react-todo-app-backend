@@ -1,4 +1,6 @@
-import { Sequelize } from "sequelize/dist";
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+dotenv.config();
 
 if (!process.env.DB_URI) {
     console.log("Must include property DB_URI with postgres database uri.");
