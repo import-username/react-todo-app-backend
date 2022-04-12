@@ -35,7 +35,7 @@ export default function login(): Router {
             const compareHash = await bcrypt.compare(password, hashedPassword);
             
             if (compareHash) {
-                const accessToken: string = jwt.sign({ email: email }, <string> process.env.JWT_SECRET);
+                const accessToken: string = jwt.sign({ user_id: userFindQuery.get().id }, <string> process.env.JWT_SECRET);
                 
                 return res.status(200).cookie("auth_cookie", accessToken, {
                     httpOnly: true,

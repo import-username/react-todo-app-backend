@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
-import jwt from "jsonwebtoken";
+import { Response, NextFunction, RequestHandler, Request } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { AuthResponse } from "../ts/interface/authResponse";
 dotenv.config();
 
-export default function auth(req: Request, res: Response, next: NextFunction): Response | void {
+export default function auth(req: Request, res: AuthResponse, next: NextFunction): Response | void {
     if (req.cookies && req.cookies["auth_cookie"]) {
         const token: string = req.cookies["auth_cookie"];
 
@@ -12,6 +13,10 @@ export default function auth(req: Request, res: Response, next: NextFunction): R
                 return res.status(500).json({
                     message: "Internal server error."
                 });
+            }
+
+            res.locals.user = {
+                id: (decoded as JwtPayload).user_id
             }
 
             return next();
