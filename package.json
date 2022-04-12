@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "server": "concurrently \"tsc -w\" \"nodemon \"./dist/main.js\"\"",
-        "serverDev": "concurrently \"npm run server\" \"tsc -w\" \"npm run start --prefix ../frontend\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "server": "ts-node-dev ./src/main.ts",
+        "dev": "concurrently \"tsnd --exit-child ./src/main.ts\" \"npm run start --prefix ../frontend\"",
+        "build": "rm -f -r ./dist && tsc --build"
     },
     "keywords": [],
     "author": "",
@@ -20,6 +20,7 @@
         "@types/pg": "^8.6.4",
         "concurrently": "^7.0.0",
         "nodemon": "^2.0.15",
+        "ts-node-dev": "^1.1.8",
         "typescript": "^4.5.5"
     },
     "dependencies": {
